@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="/add">
+    <input type="text" name="task" placeholder="Enter new task" required>
+    <button type="submit">Add Task</button>
+</form>
+
+<ul>
+    {% for task in tasks %}
+        <li class="{{ 'done' if task.done }}">
+            {{ task.text }}
+            {% if not task.done %}
+                <a href="/complete/{{ loop.index0 }}">✔️</a>
+            {% endif %}
+            <a href="/delete/{{ loop.index0 }}">🗑️</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
